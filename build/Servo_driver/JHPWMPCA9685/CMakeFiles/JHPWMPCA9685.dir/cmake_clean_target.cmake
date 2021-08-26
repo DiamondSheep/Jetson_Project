@@ -1,3 +1,0 @@
-file(REMOVE_RECURSE
-  "libJHPWMPCA9685.a"
-)

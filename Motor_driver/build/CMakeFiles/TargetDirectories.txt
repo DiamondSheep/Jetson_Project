@@ -1,3 +1,0 @@
-/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/build/CMakeFiles/rebuild_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/build/CMakeFiles/run.dir
-/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/build/CMakeFiles/edit_cache.dir

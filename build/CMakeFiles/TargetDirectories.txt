@@ -1,9 +1,0 @@
-/home/gaoyangcheng/Code/Jetson_Project/build/CMakeFiles/rebuild_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/CMakeFiles/face_detection.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/CMakeFiles/edit_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/CMakeFiles/rebuild_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/CMakeFiles/servo_driver.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/CMakeFiles/edit_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/JHPWMPCA9685/CMakeFiles/rebuild_cache.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/JHPWMPCA9685/CMakeFiles/JHPWMPCA9685.dir
-/home/gaoyangcheng/Code/Jetson_Project/build/Servo_driver/JHPWMPCA9685/CMakeFiles/edit_cache.dir

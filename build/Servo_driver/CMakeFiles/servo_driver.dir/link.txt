@@ -1,2 +1,0 @@
-/usr/bin/ar qc libservo_driver.a  CMakeFiles/servo_driver.dir/servo_driver.cpp.o
-/usr/bin/ranlib libservo_driver.a
