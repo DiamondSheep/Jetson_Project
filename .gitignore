@@ -1,0 +1,31 @@
+# test files
+test*
+
+# build files
+build
+
+# vscode configs
+.vscode
+
+# libraries
+*.so
+*.dylib
+*.dll
+*.lai
+*.la
+*.a
+*.lib
+
+# object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# precomplied headers
+*.gch
+*.pch
+
+# executable files
+*.exe
+
