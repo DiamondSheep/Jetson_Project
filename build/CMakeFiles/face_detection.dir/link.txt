@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/face_detection.dir/face_detection.cpp.o  -o face_detection Servo_driver/libservo_driver.a -lopencv2 Servo_driver/JHPWMPCA9685/libJHPWMPCA9685.a -li2c 

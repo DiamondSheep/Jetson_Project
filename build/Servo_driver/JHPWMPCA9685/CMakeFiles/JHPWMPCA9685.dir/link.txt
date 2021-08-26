@@ -1,0 +1,2 @@
+/usr/bin/ar qc libJHPWMPCA9685.a  CMakeFiles/JHPWMPCA9685.dir/JHPWMPCA9685.cpp.o
+/usr/bin/ranlib libJHPWMPCA9685.a

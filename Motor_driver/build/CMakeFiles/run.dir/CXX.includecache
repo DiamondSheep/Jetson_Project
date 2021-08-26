@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/L298N_Jetson.cpp
+L298N_Jetson.hpp
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/L298N_Jetson.hpp
+
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/L298N_Jetson.hpp
+JetsonGPIO.h
+-
+memory
+-
+
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/definitions.h
+
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/main.cpp
+definitions.h
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/definitions.h
+L298N_Jetson.hpp
+/home/gaoyangcheng/Code/Jetson_Project/Motor_driver/L298N_Jetson.hpp
+unistd.h
+-
+iostream
+-
+

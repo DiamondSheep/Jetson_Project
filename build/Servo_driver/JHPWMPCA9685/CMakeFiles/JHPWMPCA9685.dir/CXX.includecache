@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gaoyangcheng/Code/Jetson_Project/Servo_driver/JHPWMPCA9685/JHPWMPCA9685.cpp
+JHPWMPCA9685.hpp
+/home/gaoyangcheng/Code/Jetson_Project/Servo_driver/JHPWMPCA9685/JHPWMPCA9685.hpp
+math.h
+-
+
+/home/gaoyangcheng/Code/Jetson_Project/Servo_driver/JHPWMPCA9685/JHPWMPCA9685.hpp
+cstddef
+-
+linux/i2c.h
+-
+i2c/smbus.h
+-
+linux/i2c-dev.h
+-
+sys/ioctl.h
+-
+cstdlib
+-
+cstdio
+-
+fcntl.h
+-
+unistd.h
+-
+errno.h
+-
+
