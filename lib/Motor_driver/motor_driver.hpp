@@ -16,7 +16,7 @@ public:
 		          unsigned short IN3, unsigned short IN4);
    // motor_driver(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2, int IN3, int IN4, bool setup);
    
-   void setSpeed(const unsigned short pwmVal);
+   void setSpeed(const unsigned short Val);
    const unsigned short getSpeed();
    void forward();
    void backward();

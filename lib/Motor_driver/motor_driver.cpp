@@ -4,10 +4,14 @@
 motor_driver::motor_driver() = default;
 
 motor_driver::~motor_driver() { 
-    this->Drive_PWM_left->stop();
-    this->Drive_PWM_right->stop();
+    this->stop();
     if (this->setup){
-        GPIO::cleanup();
+        GPIO::cleanup(EN[0]);
+	GPIO::cleanup(EN[1]);
+	GPIO::cleanup(left[0]);
+	GPIO::cleanup(left[1]);
+	GPIO::cleanup(right[0]);
+	GPIO::cleanup(right[1]);
     }
 };
 
@@ -27,10 +31,9 @@ motor_driver::motor_driver(unsigned short EnablePinA,
     this->right[1] = IN4;
     
     this->pwmVal = 0;
-    // 设置GPIO的模式（应该是对的）
+    
     GPIO::setmode(GPIO::BOARD);
     // setting the level
-    //设置电平
     GPIO::setup(this->EN[0], GPIO::OUT, GPIO::HIGH);
     GPIO::setup(this->left[0], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::LOW);
@@ -38,7 +41,7 @@ motor_driver::motor_driver(unsigned short EnablePinA,
     GPIO::setup(this->EN[1], GPIO::OUT, GPIO::HIGH);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->right[1], GPIO::OUT,GPIO::LOW);
-    // 设置 pwm 驱动
+
     this->Drive_PWM_left = std::make_shared<GPIO::PWM>(this->EN[0], 10000);
     this->Drive_PWM_right = std::make_shared<GPIO::PWM>(this->EN[1], 10000);
 
@@ -89,8 +92,8 @@ motor_driver::motor_driver(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2,
 }
 */
 
-void motor_driver::setSpeed(const unsigned short pwmVal){
-    this->pwmVal = pwmVal;
+void motor_driver::setSpeed(const unsigned short Val){
+    this->pwmVal = Val;
 }
 
 const unsigned short motor_driver::getSpeed(){
@@ -102,7 +105,6 @@ void motor_driver::forward(){
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->right[1], GPIO::OUT,GPIO::HIGH);
-
     run();
 }
 void motor_driver::backward(){
@@ -110,7 +112,6 @@ void motor_driver::backward(){
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::HIGH);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::HIGH);
     GPIO::setup(this->right[1], GPIO::OUT,GPIO::LOW);
-
     run();
 }
 
