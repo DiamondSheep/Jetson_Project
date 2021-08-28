@@ -2,7 +2,7 @@
 #define _SERVO_H
 
 #include <memory>
-#include "JHPWMPCA9685.hpp"
+#include "JHPWMPCA9685/JHPWMPCA9685.hpp"
 
 class servo_driver{
 public:

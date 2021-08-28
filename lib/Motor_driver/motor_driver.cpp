@@ -1,9 +1,9 @@
 
 #include "motor_driver.hpp"
 
-L298N_Jetson::L298N_Jetson() = default;
+motor_driver::motor_driver() = default;
 
-L298N_Jetson::~L298N_Jetson() { 
+motor_driver::~motor_driver() { 
     this->Drive_PWM_left->stop();
     this->Drive_PWM_right->stop();
     if (this->setup){
@@ -11,7 +11,7 @@ L298N_Jetson::~L298N_Jetson() {
     }
 };
 
-L298N_Jetson::L298N_Jetson(unsigned short EnablePinA, 
+motor_driver::motor_driver(unsigned short EnablePinA, 
 			               unsigned short IN1, 
 			               unsigned short IN2, 
 			               unsigned short EnablePinB, 
@@ -45,7 +45,7 @@ L298N_Jetson::L298N_Jetson(unsigned short EnablePinA,
     this->setup = true;
 }
 
-L298N_Jetson::L298N_Jetson(unsigned short IN1, 
+motor_driver::motor_driver(unsigned short IN1, 
 			               unsigned short IN2, 
 			               unsigned short IN3, 
 			               unsigned short IN4) {
@@ -67,7 +67,7 @@ L298N_Jetson::L298N_Jetson(unsigned short IN1,
 }
 
 /*
-L298N_Jetson::L298N_Jetson(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2, int IN3, int IN4, bool setup){
+motor_driver::motor_driver(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2, int IN3, int IN4, bool setup){
     // initialization with a given PWM
     this->Drive_PWM = drive;
 
@@ -89,15 +89,15 @@ L298N_Jetson::L298N_Jetson(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2,
 }
 */
 
-void L298N_Jetson::setSpeed(const unsigned short pwmVal){
+void motor_driver::setSpeed(const unsigned short pwmVal){
     this->pwmVal = pwmVal;
 }
 
-const unsigned short L298N_Jetson::getSpeed(){
+const unsigned short motor_driver::getSpeed(){
     return this->pwmVal;
 }
 
-void L298N_Jetson::forward(){
+void motor_driver::forward(){
     GPIO::setup(this->left[0], GPIO::OUT,GPIO::HIGH);
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::LOW);
@@ -105,7 +105,7 @@ void L298N_Jetson::forward(){
 
     run();
 }
-void L298N_Jetson::backward(){
+void motor_driver::backward(){
     GPIO::setup(this->left[0], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::HIGH);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::HIGH);
@@ -115,7 +115,7 @@ void L298N_Jetson::backward(){
 }
 
 
-void L298N_Jetson::run(){
+void motor_driver::run(){
     this->Drive_PWM_left->ChangeDutyCycle( (this->pwmVal) / 255.0 );
     this->Drive_PWM_right->ChangeDutyCycle( (this->pwmVal) / 255.0 );
     //this->Drive_PWM_left->start(this->pwmVal);
@@ -124,7 +124,7 @@ void L298N_Jetson::run(){
     //a percentage for the GPIO library
 }
 
-void L298N_Jetson::stop(){
+void motor_driver::stop(){
     GPIO::setup(this->left[0], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->left[1], GPIO::OUT,GPIO::LOW);
     GPIO::setup(this->right[0], GPIO::OUT,GPIO::LOW);

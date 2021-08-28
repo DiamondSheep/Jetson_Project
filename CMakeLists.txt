@@ -4,18 +4,37 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 cmake_minimum_required(VERSION 3.10)
 project(face_detection)
 
+# include PCA9685 library
+#add_subdirectory(JHPWMPCA9685)
+#list(APPEND EXTRA_LIBS JHPWMPCA9685)
+#list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/JHPWMPCA9685")
+
+add_subdirectory(lib)
 # include servo driver library
-add_subdirectory(Servo_driver)
+#add_subdirectory(Servo_driver)
 list(APPEND EXTRA_LIBS servo_driver)
-list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/Servo_driver")
+list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/Servo_driver")
+
+# include motor driver library
+#add_subdirectory(Motor_driver)
+list(APPEND EXTRA_LIBS motor_driver)
+list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/Motor_driver")
+
+# include JetsonGPIO library
+#find_library(jetson_gpio JetsonGPIO)
+#list(APPEND EXTRA_LIBS JetsonGPIO)
+#list(APPEND EXTRA_INCLUDES jetson_gpio)
 
 # include opencv library
-list(APPEND EXTRA_LIBS opencv2)
-list(APPEND EXTRA_INCLUDES "/usr/include/opencv2")
+find_package( OpenCV REQUIRED )
+list(APPEND EXTRA_LIBS ${OpenCV_LIBS})
+list(APPEND EXTRA_INCLUDES ${OpenCV_DIRS})
 
-set(sources face_detection.cpp)
+list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/include")
+set(sources "${PROJECT_SOURCE_DIR}/src/face_detection.cpp")
+add_executable(${CMAKE_PROJECT_NAME} ${sources})
 
-add_executable(face_detection ${sources})
-
-target_link_libraries(face_detection PUBLIC ${EXTRA_LIBS})
-target_include_directories(face_detection PUBLIC ${EXTRA_INCLUDES})
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${EXTRA_LIBS})
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR} 
+						     ${EXTRA_INCLUDES}
+						     )

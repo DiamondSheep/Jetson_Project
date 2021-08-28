@@ -4,21 +4,18 @@
 #include <JetsonGPIO.h>
 #include <memory>
 
-class L298N_Jetson {
+class motor_driver {
 public:
-   // 构造函数（初始化对象）和析构函数
-   L298N_Jetson();
+   motor_driver();
     
-   ~L298N_Jetson();
+   ~motor_driver();
   
-   // main函数里用的是这个 ↓
-   L298N_Jetson(unsigned short EnablePinA, unsigned short IN1, unsigned short IN2, 
+   motor_driver(unsigned short EnablePinA, unsigned short IN1, unsigned short IN2, 
 		          unsigned short EnablePinB, unsigned short IN3, unsigned short IN4);
-   L298N_Jetson(unsigned short IN1, unsigned short IN2, 
+   motor_driver(unsigned short IN1, unsigned short IN2, 
 		          unsigned short IN3, unsigned short IN4);
-   // L298N_Jetson(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2, int IN3, int IN4, bool setup);
+   // motor_driver(std::shared_ptr<GPIO::PWM> drive[], int IN1, int IN2, int IN3, int IN4, bool setup);
    
-   // 一些用来控制电机的函数
    void setSpeed(const unsigned short pwmVal);
    const unsigned short getSpeed();
    void forward();
