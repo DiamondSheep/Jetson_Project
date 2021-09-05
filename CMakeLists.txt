@@ -4,26 +4,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 cmake_minimum_required(VERSION 3.10)
 project(face_detection)
 
-# include PCA9685 library
-#add_subdirectory(JHPWMPCA9685)
-#list(APPEND EXTRA_LIBS JHPWMPCA9685)
-#list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/JHPWMPCA9685")
-
 add_subdirectory(lib)
 # include servo driver library
 #add_subdirectory(Servo_driver)
-list(APPEND EXTRA_LIBS servo_driver)
-list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/Servo_driver")
-
-# include motor driver library
-#add_subdirectory(Motor_driver)
-list(APPEND EXTRA_LIBS motor_driver)
-list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/Motor_driver")
-
-# include JetsonGPIO library
-#find_library(jetson_gpio JetsonGPIO)
-#list(APPEND EXTRA_LIBS JetsonGPIO)
-#list(APPEND EXTRA_INCLUDES jetson_gpio)
+list(APPEND EXTRA_LIBS driver)
+list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/driver")
 
 # include opencv library
 find_package( OpenCV REQUIRED )

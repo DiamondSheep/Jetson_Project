@@ -8,9 +8,14 @@
 
 #define JETSON_IN1_PIN 35
 #define JETSON_IN2_PIN 36
+
 #define JETSON_IN3_PIN 37
 #define JETSON_IN4_PIN 38
 
+#define JETSON_AM1_PIN 21
+#define JETSON_BM1_PIN 22
+#define JETSON_AM2_PIN 23
+#define JETSON_BM2_PIN 24
 
 #define MAX_LEFT -32768
 #define MAX_RIGHT 32768

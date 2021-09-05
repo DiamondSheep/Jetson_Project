@@ -1,3 +1,2 @@
 
-add_subdirectory(Motor_driver)
-add_subdirectory(Servo_driver)
+add_subdirectory(driver)
