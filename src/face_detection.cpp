@@ -45,10 +45,10 @@ int main(){
 	// machine.angle(0, 90);
 
 	machine.forward();
-	for (int i = 0; i != 10; i++){
-		machine.set_speed(100 * i + 500);
+	for (int i = 0; i != 3; i++){
+		machine.set_speed(3000 - 100 * i);
         	// machine.forward();
-		std::cout << "Speed: " <<  100 * i + 500 << std::endl;
+		std::cout << "Speed: " <<  3000 - 100 * i << std::endl;
 		sleep(1);
 	}
 	

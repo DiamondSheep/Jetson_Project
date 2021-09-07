@@ -5,10 +5,12 @@ cmake_minimum_required(VERSION 3.10)
 project(face_detection)
 
 add_subdirectory(lib)
-# include servo driver library
-#add_subdirectory(Servo_driver)
+# include driver library
 list(APPEND EXTRA_LIBS driver)
 list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/driver")
+# include handler library
+list(APPEND EXTRA_LIBS handler)
+list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/lib/handler")
 
 # include opencv library
 find_package( OpenCV REQUIRED )
