@@ -2,7 +2,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 cmake_minimum_required(VERSION 3.10)
-project(face_detection)
+#project(face_detection) # for face detection and tracking
+project(motor_test)      # for motor testing 
 
 add_subdirectory(lib)
 # include driver library
@@ -18,7 +19,7 @@ list(APPEND EXTRA_LIBS ${OpenCV_LIBS})
 list(APPEND EXTRA_INCLUDES ${OpenCV_DIRS})
 
 list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/include")
-set(sources "${PROJECT_SOURCE_DIR}/src/face_detection.cpp")
+set(sources "${PROJECT_SOURCE_DIR}/src/${CMAKE_PROJECT_NAME}.cpp")
 add_executable(${CMAKE_PROJECT_NAME} ${sources})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${EXTRA_LIBS})
