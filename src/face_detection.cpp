@@ -3,7 +3,7 @@
 
 int main(){
 
-        driver machine(1); // bus 1 of Jetson Nano
+        driver machine; // bus 1 of Jetson Nano
         //servo.angle(n, angle); // n=0 for bottom; n=1 for top;
 	
 	// machine.angle(1, 90);

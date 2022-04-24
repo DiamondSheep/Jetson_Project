@@ -1,4 +1,4 @@
-#include "JHPWMPCA9685.hpp"
+#include "PCA9685.hpp"
 #include <math.h>
 
 PCA9685::PCA9685(int address, int bus) {
@@ -48,7 +48,7 @@ void PCA9685::reset () {
 // Sets the frequency of the PWM signal
 // Frequency is ranged between 40 and 1000 Hertz
 void PCA9685::setPWMFrequency ( float frequency ) {
-    printf("Setting PCA9685 PWM frequency to %f Hz\n",frequency) ;
+    //printf("Setting PCA9685 PWM frequency to %f Hz\n",frequency) ;
     float rangedFrequency = fmin(fmax(frequency,40),1000) ;
     int prescale = (int)(25000000.0f / (4096 * rangedFrequency) - 0.5f) ;
     // For debugging

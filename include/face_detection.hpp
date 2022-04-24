@@ -74,7 +74,8 @@ std::string gstreamer_pipeline (int capture_width, int capture_height,
 }
 
 void face_detect(std::string pipeline){
-        driver servo(1); // bus 1 of Jetson Nano
+        
+        driver servo; // bus 1 of Jetson Nano
 
         cv::CascadeClassifier face_cascade = cv::CascadeClassifier(
                        "/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml"

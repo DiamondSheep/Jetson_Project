@@ -3,24 +3,15 @@
 
 #include <memory>
 #include <JetsonGPIO.h>
-#include "JHPWMPCA9685/JHPWMPCA9685.hpp"
+#include "PCA9685/PCA9685.hpp"
 
 class driver{
 public:
     driver();
-    driver(int bus=1, int address=0x40);
     ~driver();
 
-    void angle(int channel, int angle);
-
-    void forward();
-    void backward();
-    void run();
-    void stop();
-    void set_speed(int val); // val range from 0 to 4095
-
+    void angle(const int channel, const int angle);
     int top_angle = 90, bottom_angle = 90;
-    int speed_left = 0, speed_right = 0;
 
 private:
 
@@ -36,7 +27,7 @@ private:
     int servoMiddle = 298;
 
     // map degrees to the servo value
-    int map(int degree);
+    int map (const int degree) const;
 
     unsigned short IN1=35;
     unsigned short IN2=36;
