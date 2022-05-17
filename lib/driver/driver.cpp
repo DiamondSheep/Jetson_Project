@@ -1,46 +1,44 @@
 #include "driver.hpp"
 
-driver::driver(){
+driver::driver(int bus, int address, int frequency)
+    : _bus(bus), _address(address), _frequency(frequency){
     GPIO::setwarnings(true);
-    PWMdirver = std::make_shared<PCA9685>(address, bus);   
-    PWMdirver->openPCA9685();
-    printf("PCA9685 Device Address: 0x%02X, Frequency: %d Hz\n", PWMdirver->kI2CAddress, frequency);
-    PWMdirver->setAllPWM(0, 0);
-    PWMdirver->reset();
-    PWMdirver->setPWMFrequency(frequency);
+    _PWMdirver = std::make_shared<PCA9685>(_address, _bus);   
+    _PWMdirver->openPCA9685();
+    // printf("PCA9685 Device Address: 0x%02X, Frequency: %d Hz\n", PWMdirver->kI2CAddress, frequency);
+    _PWMdirver->setAllPWM(0, 0);
+    _PWMdirver->reset();
+    _PWMdirver->setPWMFrequency(_frequency);
     //SERVO INITIAL
-    this->angle(0, 90);
-    this->angle(1, 90);
+    _angle(0, 90);
+    _angle(1, 90);
 }
 
 driver::~driver(){
-    this->angle(0, 90);
-    this->angle(1, 100);
-    PWMdirver->closePCA9685();
+    _angle(0, 90);
+    _angle(1, 100);
+    _PWMdirver->closePCA9685();
 }
 
 // servo
-void driver::angle(const int channel, const int angle){
-    if (channel == 0)
-	bottom_angle = angle;
-    if (channel == 1)
-	top_angle = angle;
-    int value = this->map(angle);
-    if ((channel == 1 && (value <= 112 || value >= 336)) || 
-	(channel == 0 && (value <= servoMin || value >= servoMax))){
+void driver::_angle (const int channel, const int angle){
+    int value = _map(angle);
+    // Check angle range
+    if ((channel == 1 && (value <= _topServoMin || value >= _topServoMax)) 
+     || (channel == 0 && (value <= _servoMin    || value >= _servoMax))){
 	    printf("Out of angle range.\n");
 	    return;
 	}
-    PWMdirver->setPWM(channel, 0, value);
+    _PWMdirver->setPWM(channel, 0, value);
 }
 
 // private
-int driver::map (const int degree) const{
+int driver::_map (const int degree) const{
     if (degree >= 0 && degree <= 180)
-        return (degree * (servoMax-servoMin)/180 + servoMin);
+        return (degree * (_servoMax - _servoMin) / 180 + _servoMin);
     else {
-	printf("Out of angle range.\n");
-	return servoMiddle;
+        printf("Out of angle range.\n");
+        return _servoMiddle;
     }
 }
 

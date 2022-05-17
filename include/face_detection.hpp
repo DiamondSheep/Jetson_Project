@@ -13,11 +13,19 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/objdetect.hpp>
 
-#define MIN_ERROR 5
+#define MIN_ERROR 5 
+
+// PID parameters for servos (up and bottom)
+const double Kp_up = 25.0;
+const double Ki_up = 0.3;
+const double Kd_up = 0.5;
+
+const double Kp_bottom = 14.0; //  Kp_bottom / Kp_up = width / height
+const double Ki_bottom = 0.3;
+const double Kd_bottom = 0.5;
 
 class PID{
 public:
-	PID() =default;
 	PID(double, double, double);
 	~PID()=default;
 	
@@ -41,23 +49,23 @@ PID::PID(double Kp_in, double Ki_in, double Kd_in){
 	Kp = Kp_in;
 	Ki = Ki_in;
 	Kd = Kd_in;
-
 }
 
 void PID::compute(double error){
 	differential = pre1_error - error;
 	intergral += error;
-	
 	// update error
 	pre2_error = pre1_error;
 	pre1_error = error;
-	
 	output = int(Kp * error + Ki * intergral + Kd * differential);
 }
 
-std::string gstreamer_pipeline (int capture_width, int capture_height,
-                                int display_width, int display_height,
-                                int framerate, int flip_method) {
+std::string gstreamer_pipeline (int capture_width=1280, // Max 3280
+                                int capture_height=720, // Max 2464
+                                int display_width=640, 
+                                int display_height=360,
+                                int framerate=10, 
+                                int flip_method=0) {
     return "nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)" +
            std::to_string(capture_width) +
            ", height=(int)" +
@@ -73,7 +81,7 @@ std::string gstreamer_pipeline (int capture_width, int capture_height,
            ", format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
 }
 
-void face_detect(std::string pipeline){
+void face_detect(std::string pipeline=gstreamer_pipeline(), bool verbose=true){
         
         driver servo; // bus 1 of Jetson Nano
 
@@ -108,8 +116,8 @@ void face_detect(std::string pipeline){
                 std::cout << "Detect Time: " << double(end - start)/CLOCKS_PER_SEC << "s"
                           << " | Frame size: (" << frame.size[1] << ", " << frame.size[0] << ")" << std::endl;
 		
-		PID pid_X (30, .3, .3);
-		PID pid_Y (30 , .3, .3);
+		PID pid_X (25., .3, .5);
+		PID pid_Y (14., .3, .5);
                 for (auto i = 0; i < faces.size(); i++){
                         cv::Point face_center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2);
                         cv::circle(frame, face_center, 2, cv::Scalar(255, 255, 255), 2);
@@ -123,13 +131,13 @@ void face_detect(std::string pipeline){
                         if ((center.x - face_center.x > MIN_ERROR) || (face_center.x - center.x > MIN_ERROR)){
 				pid_X.compute(double(center.x - face_center.x) / frame.size[1]);
 				angle_X = pid_X.output;
-                                servo.angle(0, servo.bottom_angle + angle_X);
+                                servo.set_bottom_angle(servo.get_bottom_angle() + angle_X);
                         }
 
                         if ((face_center.y - center.y > MIN_ERROR) || (center.y - face_center.y > MIN_ERROR)){
 				pid_Y.compute(double(center.y - face_center.y) / frame.size[0]);
                                 angle_Y = pid_Y.output;
-				servo.angle(1, servo.top_angle - angle_Y);
+				servo.set_top_angle(servo.get_top_angle() - angle_Y);
                         }
 
                         cv::Point p1(faces[i].x, faces[i].y);
